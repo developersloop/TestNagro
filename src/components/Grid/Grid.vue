@@ -1,5 +1,8 @@
 <template>
-    <h2>{{msg}}</h2>
+    <div>
+        <h2>{{msg}}</h2>
+        <!-- <button class="btn btn-danger">{{msg}}</button> -->
+    </div>
 </template>
 
 
@@ -10,7 +13,7 @@
         },
         data(){
             return {
-
+                msg:'Clique-me'
             }
         }
     }
