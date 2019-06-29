@@ -36,7 +36,7 @@ import _ from 'lodash';
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
             GetAll(){
-                for (let index = 0; index < this.$store.getters.getCad[0].length; index++) {
+                for (let index = 0; index < localStorage.getItem('length'); index++) {
                           this.data.push(this.$store.getters.getCad[0][index]);
                 }
              }
