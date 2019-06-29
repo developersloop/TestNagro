@@ -1,25 +1,32 @@
 <template>
     <div>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Cpf</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
-                    <td>
-                        <button class="btn btn-danger">Excluir</button>
-                    </td>
-                    <td>{{ dt.id }}</td>
-                    <td>{{ dt.name }}</td>
-                    <td>{{ dt.cpf }}</td>
-                </tr>
-            </tbody>
-        </table>
+         <div class="container" style="widht:100%;">
+             <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id <span class="icon"><icon name="arrow-up" scale="1"/></span></th>
+                                <th scope="col">Name <span class="icon"> <icon name="arrow-up"/></span></th>
+                                <th scope="col">Cpf <span class="icon"> <icon name="arrow-up"/></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
+                                <td>
+                                    <button class="btn btn-warning">Editar&nbsp;<icon name="pen" scale="0.80"/></button> &nbsp;
+                                    <button class="btn btn-danger">Excluir&nbsp;<span><icon name="trash" scale="0.80"/></span></button>
+                                </td>
+                                <td>{{ dt.id }}</td>
+                                <td>{{ dt.name }}</td>
+                                <td>{{ dt.cpf }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+         </div>
     </div>
 </template>
 
@@ -51,3 +58,6 @@ import _ from 'lodash';
          }
      }
 </script>
+
+<style scopped>
+</style>

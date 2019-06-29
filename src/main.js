@@ -5,13 +5,14 @@ import App from './App.vue'
 import router from '../src/routes/index';
 import store from '../src/store/index';
 import BootstrapVue from 'bootstrap-vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import 'vue-awesome/icons'
+// OR import individual icons
+import 'vue-awesome/icons/pen'
+import 'vue-awesome/icons/trash'
+import 'vue-awesome/icons/trash'
+import Icon from 'vue-awesome/components/Icon'
+Vue.component('icon', Icon)
 
-library.add(faUserSecret)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
