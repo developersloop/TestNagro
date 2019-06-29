@@ -5,9 +5,10 @@
                 <div class="col-md-12">
                     <table class="table">
                         <thead class="thead-dark">
+                            <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span class="icon"><icon name="caret-up" scale="1"/></span></th>
+                                <th scope="col">Id <span  @click="Order(order)" class="icon"><icon v-bind:name="icon"  scale="1"/></span></th>
                                 <th scope="col">Name <span class="icon"> <icon name="caret-up"/></span></th>
                                 <th scope="col">Cpf <span class="icon"> <icon name="caret-up"/></span></th>
                             </tr>
@@ -15,7 +16,7 @@
                         <tbody>
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                                 <td>
-                                    <button class="btn btn-warning">Editar&nbsp;<icon name="pen" scale="0.80"/></button> &nbsp;
+                                    <button class="btn btn-info">Editar&nbsp;<icon name="pen" scale="0.80"/></button> &nbsp;
                                     <button class="btn btn-danger">Excluir&nbsp;<span><icon name="trash" scale="0.80"/></span></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
@@ -31,12 +32,14 @@
 </template>
 
 <script>
-import { mapActions,mapMutations,mapState,mapGetters } from 'vuex';
+import { mapActions,mapMutations,mapState,mapGetters } from 'vuex'; 
 import _ from 'lodash';
      export default {
          data(){
              return {
-                 data:[]
+                 data:[],
+                 order : 'asc',
+                 icon:'caret-up'
              }
          },
          mounted(){
@@ -45,6 +48,15 @@ import _ from 'lodash';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
+            Order(order){
+                if(order === 'asc'){
+                     this.icon = 'caret-down';
+                     this.order = 'desc'
+                } else if (order === 'desc'){
+                       this.icon = 'caret-up';
+                       this.order = 'asc'
+                }
+            }
          },
          computed:{
              GetAll: function(){
