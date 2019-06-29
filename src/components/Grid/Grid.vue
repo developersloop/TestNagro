@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(dt, index) in data" :key="`people-${index}`">
+                <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                     <td>
                         <button class="btn btn-danger">Excluir</button>
                     </td>
@@ -32,19 +32,22 @@ import _ from 'lodash';
                  data:[]
              }
          },
+         mounted(){
+             this.persisteApi();
+         },
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-            GetAll(){
-                for (let index = 0; index < localStorage.getItem('length'); index++) {
-                          this.data.push(this.$store.getters.getCad[0][index]);
-                }
-             }
          },
-         mounted(){
-             this.persisteApi();
-             this.GetAll();
+         computed:{
+             GetAll: function(){
+                const data = [];
+                _.forEach(this.$store.getters.getCad[0],function(value){
+                  data.push(value);
+                })
+                 this.data.push(data);
+                 return this.data[1];
+             }
          }
-         
      }
 </script>
