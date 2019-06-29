@@ -7,9 +7,9 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span class="icon"><icon name="arrow-up" scale="1"/></span></th>
-                                <th scope="col">Name <span class="icon"> <icon name="arrow-up"/></span></th>
-                                <th scope="col">Cpf <span class="icon"> <icon name="arrow-up"/></span></th>
+                                <th scope="col">Id <span class="icon"><icon name="caret-up" scale="1"/></span></th>
+                                <th scope="col">Name <span class="icon"> <icon name="caret-up"/></span></th>
+                                <th scope="col">Cpf <span class="icon"> <icon name="caret-up"/></span></th>
                             </tr>
                         </thead>
                         <tbody>

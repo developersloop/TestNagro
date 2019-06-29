@@ -9,7 +9,7 @@ import 'vue-awesome/icons'
 // OR import individual icons
 import 'vue-awesome/icons/pen'
 import 'vue-awesome/icons/trash'
-import 'vue-awesome/icons/trash'
+import 'vue-awesome/icons/caret-up'
 import Icon from 'vue-awesome/components/Icon'
 Vue.component('icon', Icon)
 
