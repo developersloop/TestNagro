@@ -10,7 +10,6 @@ const state = {
 const mutations = {
     [ADD_RESPONSE](state, ...params){
         state.cad.push(params[0].data);
-        console.log(state.cad);
     },
     [ADD_RESPONSE_ERR](state, ...params){
         state.cad = params;
