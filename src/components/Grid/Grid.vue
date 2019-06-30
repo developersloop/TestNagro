@@ -8,9 +8,9 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span  @click="Order(order)" class="icon"><icon v-bind:name="icon"  scale="1"/></span></th>
-                                <th scope="col">Name <span class="icon"> <icon name="caret-up"/></span></th>
-                                <th scope="col">Cpf <span class="icon"> <icon name="caret-up"/></span></th>
+                                <th scope="col">Id <span ref="id"  @click="Order(order,'id')" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
+                                <th scope="col">Name <span ref="name"  @click="OrderName(order)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
+                                <th scope="col">Cpf <span ref="cpf"  @click="OrderCPf(order)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,10 @@ import _ from 'lodash';
              return {
                  data:[],
                  order : 'asc',
-                 icon:'caret-up'
+                 icon:'caret-up',
+                 iconName:'caret-up',
+                 iconCpf:'caret-up',
+                 nameColumn:''
              }
          },
          mounted(){
@@ -48,25 +51,57 @@ import _ from 'lodash';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-            Order(order){
+            Order(order,nameColumn){                
                 if(order === 'asc'){
-                     this.icon = 'caret-down';
-                     this.order = 'desc'
-                } else if (order === 'desc'){
+                          this.icon = 'caret-down';
+                          this.order = 'desc'
+                          this.nameColumn = 'id'
+                     }
+                else if (order === 'desc'){
                        this.icon = 'caret-up';
+                       this.order = 'asc'
+                        this.nameColumn = 'id'
+                }
+            },
+              OrderName(order){                
+                if(order === 'asc'){
+                          this.iconName = 'caret-down';
+                          this.order = 'desc'
+                     }
+                else if (order === 'desc'){
+                       this.iconName = 'caret-up';
+                       this.order = 'asc'
+                }
+            },
+              OrderCPf(order){                
+                if(order === 'asc'){
+                          this.iconCpf = 'caret-down';
+                          this.order = 'desc'
+                     }
+                else if (order === 'desc'){
+                       this.iconCpf = 'caret-up';
                        this.order = 'asc'
                 }
             }
+            
          },
          computed:{
              GetAll: function(){
-                const data = [];
-                _.forEach(this.$store.getters.getCad[0],function(value){
-                  data.push(value);
-                })
-                 this.data.push(data);
-                 return this.data[1];
-             }
+                if(this.nameColumn === ''){
+                    const data = [];
+                  _.forEach(this.$store.getters.getCad[0],function(value){
+                        data.push(value);
+                    })
+                    this.data.push(data);
+                    return this.data[1];
+                } else {
+                    const data = [];
+                     _.forEach(this.$store.getters.getCad[0],function(value){
+                          data.push(value);
+                     })
+                     return _.orderBy(data, this.nameColumn, this.order)
+                }
+             },
          }
      }
 </script>
