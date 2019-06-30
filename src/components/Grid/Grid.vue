@@ -11,6 +11,7 @@
                                 <th scope="col">Id <span ref="id"  @click="Order(order,'id')" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
                                 <th scope="col">Name <span ref="name"  @click="OrderName(order)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
                                 <th scope="col">Cpf <span ref="cpf"  @click="OrderCPf(order)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -67,20 +68,24 @@ import _ from 'lodash';
                 if(order === 'asc'){
                           this.iconName = 'caret-down';
                           this.order = 'desc'
+                          this.nameColumn = 'name'
                      }
                 else if (order === 'desc'){
                        this.iconName = 'caret-up';
                        this.order = 'asc'
+                       this.nameColumn = 'name'
                 }
             },
               OrderCPf(order){                
                 if(order === 'asc'){
                           this.iconCpf = 'caret-down';
                           this.order = 'desc'
+                          this.nameColumn = 'cpf'
                      }
                 else if (order === 'desc'){
                        this.iconCpf = 'caret-up';
                        this.order = 'asc'
+                       this.nameColumn = 'cpf'
                 }
             }
             
