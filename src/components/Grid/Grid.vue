@@ -5,7 +5,7 @@
              <div class="row">
                 <div class="col-md-12">
                     <table class="table">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark text-center">
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
@@ -15,7 +15,7 @@
                                 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                                 <td>
                                     <button class="btn btn-info">Editar&nbsp;<icon name="pen" scale="0.80"/></button> &nbsp;
