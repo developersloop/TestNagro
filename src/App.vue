@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Grid msg="hello vue"></Grid>
+    <router-view/>
   </div>
 </template>
 
