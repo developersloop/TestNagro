@@ -1,25 +1,6 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <h2>{{msg}}</h2>
-        <!-- <button class="btn btn-danger">{{msg}}</button> -->
-    </div>
-</template>
-
-
-<script>
-    export default {
-        props:{
-            msg: String
-        },
-        data(){
-            return {
-                msg:'Clique-me'
-            }
-        }
-    }
-</script>
-=======
+        <Navbar/>
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12">
@@ -55,7 +36,11 @@
 <script>
 import { mapActions,mapMutations,mapState,mapGetters } from 'vuex'; 
 import _ from 'lodash';
+import Navbar from '../Navbar/Navbar';
      export default {
+         components:{
+             "Navbar":Navbar
+         },
          data(){
              return {
                  data:[],
@@ -133,4 +118,3 @@ import _ from 'lodash';
 
 <style scopped>
 </style>
->>>>>>> 16209a947f33aef188eef0ce31c2d2a3058d70ed
