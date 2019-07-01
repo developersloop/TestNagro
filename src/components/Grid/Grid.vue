@@ -18,8 +18,9 @@
                         <tbody class="text-center">
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                                 <td>
-                                    <button class="btn btn-info">Editar&nbsp;<icon name="pen" scale="0.80"/></button> &nbsp;
-                                    <button class="btn btn-danger">Excluir&nbsp;<span><icon name="trash" scale="0.80"/></span></button>
+                                    <button class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
+                                    <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
+                                    <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
@@ -116,5 +117,3 @@ import Navbar from '../Navbar/Navbar';
      }
 </script>
 
-<style scopped>
-</style>

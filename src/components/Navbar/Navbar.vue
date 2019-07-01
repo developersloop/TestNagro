@@ -12,19 +12,3 @@
     </div>
 </template>
 
-
-<script>
-export default {
-    data(){
-        return {
-
-        }
-    }
-}
-</script>
-
-<style>
-    .cont-nav{
-        margin-top:50px;
-    } 
-</style>

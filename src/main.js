@@ -10,6 +10,7 @@ import 'vue-awesome/icons'
 import 'vue-awesome/icons/pen'
 import 'vue-awesome/icons/trash'
 import 'vue-awesome/icons/caret-up'
+import 'vue-awesome/icons/save'
 import Icon from 'vue-awesome/components/Icon'
 Vue.component('icon', Icon)
 
