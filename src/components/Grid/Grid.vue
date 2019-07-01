@@ -9,7 +9,7 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span ref="id"  @click="Order(order,'id')" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
+                                <th scope="col">Id <span ref="id"  @click="Order(order)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
                                 <th scope="col">Name <span ref="name"  @click="OrderName(order)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
                                 <th scope="col">Cpf <span ref="cpf"  @click="OrderCPf(order)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
                                 
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions,mapMutations,mapState,mapGetters } from 'vuex'; 
+import { mapActions,mapGetters } from 'vuex'; 
 import _ from 'lodash';
 import Navbar from '../Navbar/Navbar';
      export default {
@@ -58,7 +58,7 @@ import Navbar from '../Navbar/Navbar';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-            Order(order,nameColumn){                
+            Order(order){                
                 if(order === 'asc'){
                           this.icon = 'caret-down';
                           this.order = 'desc'
