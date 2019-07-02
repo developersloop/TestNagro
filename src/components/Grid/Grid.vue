@@ -18,7 +18,7 @@
                         <tbody class="text-center">
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                                 <td>
-                                    <button class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
+                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
@@ -28,6 +28,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <Modal title = 'cadastro'/>
                 </div>
              </div>
          </div>
@@ -38,9 +39,11 @@
 import { mapActions,mapGetters } from 'vuex'; 
 import _ from 'lodash';
 import Navbar from '../Navbar/Navbar';
+import Modal from '../Modal/Modal';
      export default {
          components:{
-             "Navbar":Navbar
+             "Navbar":Navbar,
+             "Modal":Modal
          },
          data(){
              return {
