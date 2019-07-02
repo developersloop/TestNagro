@@ -9,4 +9,8 @@ export default  new Vuex.Store({
     Grower,
     Propriedades
   }
+  // Making sure that we're doing
+  // everything correctly by enabling
+  // strict mode in the dev environment.
+  // strict: process.env.NODE_ENV !== 'production',
 })
