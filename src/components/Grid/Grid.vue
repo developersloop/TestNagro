@@ -12,6 +12,7 @@
                                 <th scope="col">Id <span ref="id"  @click="Order(order)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
                                 <th scope="col">Name <span ref="name"  @click="OrderName(order)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
                                 <th scope="col">Cpf <span ref="cpf"  @click="OrderCPf(order)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
+                                <th scope="col">Propriedades</th>
                                 
                             </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
                                 <td>{{ dt.cpf }}</td>
+                                <td><icon style="cursor:pointer" name="arrow-right"/> </td>
                             </tr>
                         </tbody>
                     </table>

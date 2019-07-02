@@ -1,0 +1,5 @@
+import 'vue-awesome/icons/pen'
+import 'vue-awesome/icons/trash'
+import 'vue-awesome/icons/caret-up'
+import 'vue-awesome/icons/save'
+import 'vue-awesome/icons/arrow-right'
