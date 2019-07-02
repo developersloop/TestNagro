@@ -28,9 +28,6 @@ const actions = {
      .catch(err => commit(ADD_RESPONSE,err));
    },
 
-   persisteData({commit}){
-       console.log('chegou aqui');
-   }
 };
 
 const getters = {

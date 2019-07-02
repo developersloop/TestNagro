@@ -7,7 +7,7 @@ import store from '../src/store/index';
 import BootstrapVue from 'bootstrap-vue'
 import 'vue-awesome/icons'
 // OR import individual icons
-import Icons from './assets/Icons/index';
+// import Icons from './assets/Icons/index';
 import Icon from 'vue-awesome/components/Icon'
 Vue.component('icon', Icon)
 

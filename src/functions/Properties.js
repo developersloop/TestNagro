@@ -1,12 +1,9 @@
 import axios from 'axios';
 
 
-export function getGrower () {
-   const Headers = {
-      headers: {"Access-Control-Allow-Origin": "*"}
-   }
+export function getProperties() {
    return axios.
-          get('https://my-json-server.typicode.com/pedroskakum/fake-api/grower',{
+          get('https://my-json-server.typicode.com/pedroskakum/fake-api/properties',{
             headers: {
                'Access-Control-Allow-Origin': '*',
              },
