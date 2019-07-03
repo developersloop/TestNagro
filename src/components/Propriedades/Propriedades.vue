@@ -9,10 +9,10 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">ID<span ref="id">&nbsp;<icon name='caret-up' scale="1"/></span></th>
-                                <th scope="col">Name <span ref="name"><icon name='caret-up' scale="1"/></span></th>
-                                <th scope="col">Total Área <span ref="total_area"><icon name='caret-up' scale="1"/></span></th>
-                                <th scope="col">City <span ref="city"><icon name='caret-up' scale="1"/></span></th>
+                                <th scope="col">Id<span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon">&nbsp;<icon v-bind:name="icon" scale="1"/></span></th>
+                                <th scope="col">Name <span ref="name" @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
+                                <th scope="col">Total Área <span ref="total_area" @click="Order(order,'area','caret-down',icon)"><icon v-bind:name="iconArea" scale="1"/></span></th>
+                                <th scope="col">City <span ref="city" @click="Order(order,'city','caret-down',icon)"><icon v-bind:name="iconCity" scale="1"/></span></th>
                                 
                             </tr>
                         </thead>
@@ -47,7 +47,13 @@ import _ from 'lodash';
         },
         data(){
             return { 
-               data:[]
+               data:[],
+                 order : 'asc',
+                 icon:'caret-up',
+                 iconName:'caret-up',
+                 iconArea:'caret-up',
+                 iconCity:'caret-up',
+                 nameColumn:''
             }
         },
         mounted(){
@@ -56,6 +62,48 @@ import _ from 'lodash';
         methods:{
             ...mapActions(['Propriedades','getAllProperties']),
             ...mapGetters(['Propriedades','getProperties']),
+
+              Order(order,nameColumn,icon,nameIcon){    
+                  let icon_result = '';            
+                if(order === 'asc'){
+                         switch (nameColumn) {
+                             case 'id':
+                               this.icon = icon;
+                             break;
+                             case 'name':
+                               this.iconName = icon;
+                             break;
+                              case 'area':
+                               this.iconArea = icon;
+                             break;
+                              case 'city':
+                               this.iconCity = icon;
+                             break;
+                         }
+                       
+                          this.order = 'desc'
+                          this.nameColumn = nameColumn
+                     }
+                else if (order === 'desc'){
+                     switch (nameColumn) {
+                             case 'id':
+                               this.icon = 'caret-up'
+                             break;
+                             case 'name':
+                               this.iconName = 'caret-up'
+                             break;
+                              case 'area':
+                               this.iconArea = 'caret-up'
+                             break;
+                              case 'city':
+                               this.iconCity = 'caret-up'
+                             break;
+                         }
+                       this.order = 'asc'
+                       this.nameColumn = nameColumn
+                }
+            },
+            
         },
 
         computed:{
