@@ -9,7 +9,7 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span ref="id"  class="icon"></span></th>
+                                <th scope="col">ID<span ref="id"  class="icon"></span></th>
                                 <th scope="col">Name <span ref="name" class="icon"> </span></th>
                                 <th scope="col">Total Área <span ref="total_area" class="icon"> </span></th>
                                 <th scope="col">City <span ref="city" class="icon"></span></th>
@@ -17,16 +17,16 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr>
+                            <tr v-for="(dt, index) in getAll" :key="`properties${index}`">
                                 <td>
                                     <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
-                                <td>{{ id }}</td>
-                                <!-- <td>{{ name }}</td> -->
-                                <!-- <td>{{ dt.total_area }}</td>
-                                <td>{{ dt.city }}</td> -->
+                                <td >{{ dt.id }}</td>
+                                <td>{{ dt.name }}</td>
+                                <td>{{ dt.total_area }}</td>
+                                <td>{{ dt.city }}</td> 
                             </tr>
                         </tbody>
                     </table>
@@ -47,22 +47,33 @@ import _ from 'lodash';
         },
         data(){
             return { 
-               id:'',
-               name:'',
+               data:[]
             }
         },
         mounted(){
-          this.getAllProperties(this.$route.params.id);
-          this.getAll();
+          this.getAllProperties();
         },
         methods:{
             ...mapActions(['Propriedades','getAllProperties']),
             ...mapGetters(['Propriedades','getProperties']),
-               getAll(){
-                    // const {id,name,city,total_area} =  this.$store.getters.getProperties;
-                    console.log(this.$store.getters.getProperties);
-                    // return data;
-            }
         },
+
+        computed:{
+            getAll(){
+                   const data = [];
+                   const id = this.$route.params.id;
+                  _.forEach(this.$store.getters.getProperties[0],function(value){
+                        for (let index = 0; index < value.length; index++) {
+                            if(value[index].growerId == id){
+                                data.push(value[index])
+                            }
+                        }
+                    })
+                    this.data.push(data);
+                    // console.log(this.data);
+                    return data;
+            }
+        }
+
     }
 </script>

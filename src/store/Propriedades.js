@@ -10,7 +10,7 @@ const state = {
 
 const mutations = {
   [GET_ALL_RESPONSE](state,...params){
-     state.properties = params
+     state.properties.push(params);
   },
   [ERR_RESPONSE](state,...params){
     state.err = params;
@@ -18,17 +18,18 @@ const mutations = {
 }
 
 const actions = {
-    getAllProperties({commit},id){
-        Service.getProperties(id)
-        .then(data => commit(GET_ALL_RESPONSE,data.data))
+    getAllProperties({commit}){
+        Service.getProperties()
+        .then(data => {
+            commit(GET_ALL_RESPONSE,data.data)
+        })
         .catch(err => commit(ERR_RESPONSE,err))
     }
 };
 
 const getters = {
     getProperties(){
-        console.log(state.properties);
-        return state.properties[0];
+        return state.properties;
     }
 }
 

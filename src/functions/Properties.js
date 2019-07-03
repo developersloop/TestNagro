@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 
-export function getProperties(id) {
+export function getProperties() {
    return axios.
-          get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties/${id}`,{
+          get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{
             headers: {
                'Access-Control-Allow-Origin': '*',
              },

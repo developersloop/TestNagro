@@ -26,7 +26,7 @@
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
                                 <td>{{ dt.cpf }}</td>
-                                <td><router-link :to="{name:'Propriedades', params:{id:dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
+                                <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                         </tbody>
                     </table>
@@ -104,15 +104,14 @@ import Modal from '../Modal/Modal';
          computed:{
              GetAll: function(){
                  const reference = this;
+                 const data = [];
                 if(this.nameColumn === ''){
-                    const data = [];
                   _.forEach(this.$store.getters.getCad[0],function(value){
                         data.push(value);
                     })
                     reference.data.push(data);
                     return this.data[1];
                 } else {
-                    const data = [];
                      _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);
                      })
