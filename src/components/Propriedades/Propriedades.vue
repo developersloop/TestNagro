@@ -9,10 +9,10 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">ID<span ref="id"  class="icon"></span></th>
-                                <th scope="col">Name <span ref="name" class="icon"> </span></th>
-                                <th scope="col">Total Área <span ref="total_area" class="icon"> </span></th>
-                                <th scope="col">City <span ref="city" class="icon"></span></th>
+                                <th scope="col">ID<span ref="id">&nbsp;<icon name='caret-up' scale="1"/></span></th>
+                                <th scope="col">Name <span ref="name"><icon name='caret-up' scale="1"/></span></th>
+                                <th scope="col">Total Área <span ref="total_area"><icon name='caret-up' scale="1"/></span></th>
+                                <th scope="col">City <span ref="city"><icon name='caret-up' scale="1"/></span></th>
                                 
                             </tr>
                         </thead>
