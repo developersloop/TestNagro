@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+/* eslint-disable */
 import *  as Service from '../functions/Properties';
 const GET_ALL_RESPONSE = 'GET_ALL_RESPONSE';
 const ERR_RESPONSE = 'ERR_RESPONSE';
@@ -9,7 +10,7 @@ const state = {
 
 const mutations = {
   [GET_ALL_RESPONSE](state,...params){
-     state.properties = params;
+     state.properties = params
   },
   [ERR_RESPONSE](state,...params){
     state.err = params;
@@ -26,7 +27,8 @@ const actions = {
 
 const getters = {
     getProperties(){
-        return state.properties;
+        console.log(state.properties);
+        return state.properties[0];
     }
 }
 

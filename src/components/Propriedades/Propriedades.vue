@@ -9,10 +9,10 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span ref="id"  class="icon"><icon name="caret-up" scale="1"/></span></th>
-                                <th scope="col">Name <span ref="name" class="icon"> <icon name="caret-up" scale="1"/></span></th>
-                                <th scope="col">Total Área <span ref="total_area" class="icon"> <icon name="caret-up" scale="1"/></span></th>
-                                <th scope="col">City <span ref="city" class="icon"> <icon  name="caret-up"/></span></th>
+                                <th scope="col">Id <span ref="id"  class="icon"></span></th>
+                                <th scope="col">Name <span ref="name" class="icon"> </span></th>
+                                <th scope="col">Total Área <span ref="total_area" class="icon"> </span></th>
+                                <th scope="col">City <span ref="city" class="icon"></span></th>
                                 
                             </tr>
                         </thead>
@@ -24,9 +24,9 @@
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
                                 <td>{{ id }}</td>
-                                <td>{{ name }}</td>
-                                <td>{{ total_area }}</td>
-                                <td>{{ city }}</td>
+                                <!-- <td>{{ name }}</td> -->
+                                <!-- <td>{{ dt.total_area }}</td>
+                                <td>{{ dt.city }}</td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Navbar from '../Navbar/Navbar';
 import { mapActions,mapGetters } from 'vuex'; 
 import _ from 'lodash';
@@ -46,10 +47,8 @@ import _ from 'lodash';
         },
         data(){
             return { 
-                id:'',
-                name:'',
-                total_area:'',
-                city:''
+               id:'',
+               name:'',
             }
         },
         mounted(){
@@ -59,12 +58,10 @@ import _ from 'lodash';
         methods:{
             ...mapActions(['Propriedades','getAllProperties']),
             ...mapGetters(['Propriedades','getProperties']),
-            getAll(){
-                    const properties = this.$store.getters.getProperties;
-                    console.log(properties);
-                    _.forEach(properties,function(i){
-                        console.log(i);
-                    })
+               getAll(){
+                    // const {id,name,city,total_area} =  this.$store.getters.getProperties;
+                    console.log(this.$store.getters.getProperties);
+                    // return data;
             }
         },
     }
