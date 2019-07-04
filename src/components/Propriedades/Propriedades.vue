@@ -11,7 +11,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Id<span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon">&nbsp;<icon v-bind:name="icon" scale="1"/></span></th>
                                 <th scope="col">Name <span ref="name" @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
-                                <th scope="col">Total Área <span ref="total_area" @click="Order(order,'area','caret-down',icon)"><icon v-bind:name="iconArea" scale="1"/></span></th>
+                                <th scope="col">Total Área <span ref="total_area" @click="Order(order,'total_area','caret-down',icon)"><icon v-bind:name="iconArea" scale="1"/></span></th>
                                 <th scope="col">City <span ref="city" @click="Order(order,'city','caret-down',icon)"><icon v-bind:name="iconCity" scale="1"/></span></th>
                                 
                             </tr>
@@ -73,7 +73,7 @@ import _ from 'lodash';
                              case 'name':
                                this.iconName = icon;
                              break;
-                              case 'area':
+                              case 'total_area':
                                this.iconArea = icon;
                              break;
                               case 'city':
@@ -92,7 +92,7 @@ import _ from 'lodash';
                              case 'name':
                                this.iconName = 'caret-up'
                              break;
-                              case 'area':
+                              case 'total_area':
                                this.iconArea = 'caret-up'
                              break;
                               case 'city':
@@ -110,16 +110,28 @@ import _ from 'lodash';
             getAll(){
                    const data = [];
                    const id = this.$route.params.id;
-                  _.forEach(this.$store.getters.getProperties[0],function(value){
-                        for (let index = 0; index < value.length; index++) {
-                            if(value[index].growerId == id){
-                                data.push(value[index])
+                   if(this.nameColumn === ''){
+                    _.forEach(this.$store.getters.getProperties[0],function(value){
+                            for (let index = 0; index < value.length; index++) {
+                                if(value[index].growerId == id){
+                                    data.push(value[index])
+                                }
                             }
-                        }
-                    })
-                    this.data.push(data);
-                    // console.log(this.data);
-                    return data;
+                        })
+                        this.data.push(data);
+                        // console.log(this.data);
+                        return data;
+                } else {
+                     _.forEach(this.$store.getters.getProperties[0],function(value){
+                          for (let index = 0; index < value.length; index++) {
+                                if(value[index].growerId == id){
+                                    data.push(value[index])
+                                }
+                            }
+                     })
+                     return _.orderBy(data, this.nameColumn, this.order)
+                }
+                 
             }
         }
 
