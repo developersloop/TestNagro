@@ -9,9 +9,9 @@
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Id <span ref="id"  @click="Order(order)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
-                                <th scope="col">Name <span ref="name"  @click="OrderName(order)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
-                                <th scope="col">Cpf <span ref="cpf"  @click="OrderCPf(order)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
+                                <th scope="col">Id <span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
+                                <th scope="col">Name <span ref="name"  @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
+                                <th scope="col">Cpf <span ref="cpf"  @click="Order(order,'cpf','caret-down',icon)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
                                 <th scope="col">Propriedades</th>
                                 
                             </tr>
@@ -63,44 +63,44 @@ import Modal from '../Modal/Modal';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-            Order(order){                
+          Order(order,nameColumn,icon,nameIcon){    
+                  let icon_result = '';            
                 if(order === 'asc'){
-                          this.icon = 'caret-down';
+                         switch (nameColumn) {
+                             case 'id':
+                               this.icon = icon;
+                             break;
+                             case 'name':
+                               this.iconName = icon;
+                             break;
+                              case 'total_area':
+                               this.iconCpf = icon;
+                             break;
+                           
+                         }
+                       
                           this.order = 'desc'
-                          this.nameColumn = 'id'
+                          this.nameColumn = nameColumn
                      }
                 else if (order === 'desc'){
-                       this.icon = 'caret-up';
+                     switch (nameColumn) {
+                             case 'id':
+                               this.icon = 'caret-up'
+                             break;
+                             case 'name':
+                               this.iconName = 'caret-up'
+                             break;
+                              case 'total_area':
+                               this.iconArea = 'caret-up'
+                             break;
+                            
+                         }
                        this.order = 'asc'
-                        this.nameColumn = 'id'
+                       this.nameColumn = nameColumn
                 }
-            },
-              OrderName(order){                
-                if(order === 'asc'){
-                          this.iconName = 'caret-down';
-                          this.order = 'desc'
-                          this.nameColumn = 'name'
-                     }
-                else if (order === 'desc'){
-                       this.iconName = 'caret-up';
-                       this.order = 'asc'
-                       this.nameColumn = 'name'
-                }
-            },
-              OrderCPf(order){                
-                if(order === 'asc'){
-                          this.iconCpf = 'caret-down';
-                          this.order = 'desc'
-                          this.nameColumn = 'cpf'
-                     }
-                else if (order === 'desc'){
-                       this.iconCpf = 'caret-up';
-                       this.order = 'asc'
-                       this.nameColumn = 'cpf'
-                }
-            }
             
-         },
+         }
+    },
          computed:{
              GetAll: function(){
                  const reference = this;
@@ -119,6 +119,7 @@ import Modal from '../Modal/Modal';
                 }
              },
          }
+      
      }
 </script>
 
