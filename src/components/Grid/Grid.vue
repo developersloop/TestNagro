@@ -4,10 +4,8 @@
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12">
-                        <p class="mt-3">Current Page: {{ currentPage }}</p>
-
-                    <table class="table" id="users">
-                        <thead class="thead-dark text-center">
+                   <Table>
+                       <thead class="thead-dark text-center" slot="thead">
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
@@ -18,7 +16,7 @@
                                 
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                          <tbody class="text-center" slot="tbody">
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
                                 <td>
                                     <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
@@ -31,7 +29,7 @@
                                 <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                         </tbody>
-                    </table>
+                   </Table>
                     <Modal title = 'cadastro'/>
                 </div>
              </div>
@@ -45,12 +43,14 @@
 <script>
 import { mapActions,mapGetters } from 'vuex'; 
 import _ from 'lodash';
+import Table from '../Table/Table';
 import Navbar from '../Navbar/Navbar';
 import Modal from '../Modal/Modal';
      export default {
          components:{
              "Navbar":Navbar,
-             "Modal":Modal
+             "Modal":Modal,
+             "Table":Table
          },
          data(){
              return {

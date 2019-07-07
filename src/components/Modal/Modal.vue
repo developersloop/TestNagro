@@ -1,6 +1,7 @@
 <template>
     <div>
          <b-modal id="modal-1" title="Cadastro" hide-footer>
+             
             <b-form @submit.prevent="HandlePost()">
                <b-form-group>
                     <b-form-input
