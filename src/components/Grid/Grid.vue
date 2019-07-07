@@ -63,8 +63,8 @@ import Modal from '../Modal/Modal';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-          Order(order,nameColumn,icon,nameIcon){    
-                  let icon_result = '';            
+          Order(order,nameColumn,icon){    
+                //   let icon_result = '';            
                 if(order === 'asc'){
                          switch (nameColumn) {
                              case 'id':
