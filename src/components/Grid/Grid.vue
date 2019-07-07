@@ -4,7 +4,9 @@
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
+                        <p class="mt-3">Current Page: {{ currentPage }}</p>
+
+                    <table class="table" id="users">
                         <thead class="thead-dark text-center">
                             <!-- {{ ord }} -->
                             <tr>
@@ -33,6 +35,9 @@
                     <Modal title = 'cadastro'/>
                 </div>
              </div>
+             <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
+                  <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="users"/>
+             </div>
          </div>
     </div>
 </template>
@@ -49,6 +54,8 @@ import Modal from '../Modal/Modal';
          },
          data(){
              return {
+                 perPage: 2, // por pagina
+                 currentPage: 1, // pagina no atual momento :)
                  data:[],
                  order : 'asc',
                  icon:'caret-up',
@@ -63,8 +70,8 @@ import Modal from '../Modal/Modal';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
-          Order(order,nameColumn,icon){    
-                //   let icon_result = '';            
+          Order(order,nameColumn,icon,){    
+                            
                 if(order === 'asc'){
                          switch (nameColumn) {
                              case 'id':
@@ -110,6 +117,7 @@ import Modal from '../Modal/Modal';
                         data.push(value);
                     })
                     reference.data.push(data);
+                    localStorage.setItem('length-paginate',data.length);
                     return this.data[1];
                 } else {
                      _.forEach(this.$store.getters.getCad[0],function(value){
@@ -118,6 +126,9 @@ import Modal from '../Modal/Modal';
                      return _.orderBy(data, this.nameColumn, this.order)
                 }
              },
+               rows: function() {
+                    return  localStorage.getItem('length-paginate');
+            }
          }
       
      }
