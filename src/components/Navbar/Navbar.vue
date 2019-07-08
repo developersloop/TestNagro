@@ -5,7 +5,7 @@
                 <img src="../../assets/logo_nagro.png" width="100px;">
             </a>
             <form class="form-inline" @submit.prevent="HandleSearch()">
-                 <input class="form-control mr-sm-2" type="search" placeholder="Digite o CPF" aria-label="Search" v-model="search">
+                 <input class="form-control mr-sm-2" ref="search" type="search" placeholder="Digite o CPF" aria-label="Search" required v-model="search">
                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
            </form>
         </nav>

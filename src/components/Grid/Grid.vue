@@ -7,7 +7,7 @@
                    <Table>
                        <thead class="thead-dark text-center" slot="thead">
                             <!-- {{ ord }} -->
-                            <tr>
+                            <tr v-if="!err">
                                 <th scope="col">#</th>
                                 <th scope="col">Id <span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
                                 <th scope="col">Name <span ref="name"  @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
@@ -15,18 +15,27 @@
                                 <th scope="col">Propriedades</th>
                                 
                             </tr>
+                            <tr v-else>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Cpf</th>
+                                <th scope="col">Propriedades</th>
+                            </tr>
                         </thead>
                           <tbody class="text-center" slot="tbody">
-                            <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
+                             <tr  v-for="(dt, index) in GetAll" :key="`people-${index}`" v-if="!err">
                                 <td>
-                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
+                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm" ref="save"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
-                                <td>{{ dt.id }}</td>
-                                <td>{{ dt.name }}</td>
-                                <td>{{ dt.cpf }}</td>
-                                <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
+                                  <td>{{ dt.id }}</td>
+                                  <td>{{ dt.name }}</td>
+                                  <td>{{ dt.cpf }}</td>
+                                  <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
+                            </tr>
+                            <tr v-else>
+                                <td colspan="5" class="text-center"><span style="color:red;"><b>Termo pesquisado inexistente!</b></span></td>
                             </tr>
                         </tbody>
                    </Table>
@@ -61,7 +70,9 @@ import Modal from '../Modal/Modal';
                  icon:'caret-up',
                  iconName:'caret-up',
                  iconCpf:'caret-up',
-                 nameColumn:''
+                 nameColumn:'',
+                 searchTop:[],
+                 err:false
              }
          },
          mounted(){
@@ -109,7 +120,19 @@ import Modal from '../Modal/Modal';
          },
          HandleSearch(cpf){
           const find =  _.find(this.data[1], ['cpf', cpf]);
-          localStorage.setItem('find_search',JSON.stringify(find))
+          if(find != undefined){
+              this.searchTop.push(find);
+          } else {
+              this.err = true;
+              const err = {
+                 id:'id não encontrado!',
+                 name:'name não encontrado!',
+                 cpf:'cpf não encontrado!'
+              }
+             this.searchTop.push(err)
+
+             console.log(this.searchTop);
+          }
          }
     },
          computed:{
@@ -117,21 +140,25 @@ import Modal from '../Modal/Modal';
                  const reference = this;
                  const data = [];
                 if(this.nameColumn === ''){
-                  _.forEach(this.$store.getters.getCad[0],function(value){
+                    if(this.searchTop.length > 0){
+                         data.push(this.searchTop[0]);
+                         return data;
+                     } else {
+                        _.forEach(this.$store.getters.getCad[0],function(value){
                         data.push(value);
                     })
-                    reference.data.push(data);
-                    localStorage.setItem('length-paginate',data.length);
-                    return this.data[1];
+                           reference.data.push(data);
+                           localStorage.setItem('length-paginate',data.length);
+                           return this.data[1];
+                     }
                 } else {
                      _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);
                      })
                      return _.orderBy(data, this.nameColumn, this.order)
                 } 
-                if(this.HandleSearch){
-                  console.log('adad1111');
-                }
+
+                console.log('adad');
              },
                rows: function() {
                     return  localStorage.getItem('length-paginate');
