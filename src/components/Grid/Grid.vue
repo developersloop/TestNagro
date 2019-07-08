@@ -31,7 +31,7 @@
                                 </td>
                                   <td>{{ dt.id }}</td>
                                   <td>{{ dt.name }}</td>
-                                  <td><input  id="cpf" type="text" class="text-center"  v-mask="'###-###-###-##'" v-model="dt.cpf"></td>
+                                  <td><input  id="cpf" type="text" class="text-center"  v-mask="'###.###.###-##'" v-model="dt.cpf"></td>
                                   <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                             <tr v-else>

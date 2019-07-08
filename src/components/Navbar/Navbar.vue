@@ -11,7 +11,7 @@
                   placeholder="Digite o CPF" aria-label="Search"
                   required 
                   v-model="search"
-                  v-mask="'###-###-###-##'">
+                  v-mask="'###.###.###-##'">
                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&nbsp;&nbsp;
                  <button class="btn btn-outline-warning my-2 my-sm-0" @click="resetForm()" type="button">Limpar</button>
            </form>
