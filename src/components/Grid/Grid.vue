@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar/>
+        <Navbar  @changeMsg="HandleSearch"/>
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12">
@@ -106,6 +106,9 @@ import Modal from '../Modal/Modal';
                        this.nameColumn = nameColumn
                 }
             
+         },
+         HandleSearch(msg){
+           console.log(msg);
          }
     },
          computed:{
