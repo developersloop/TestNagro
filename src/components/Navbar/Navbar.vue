@@ -5,8 +5,15 @@
                 <img src="../../assets/logo_nagro.png" width="100px;">
             </a>
             <form class="form-inline" @submit.prevent="HandleSearch()">
-                 <input class="form-control mr-sm-2" ref="search" type="search" placeholder="Digite o CPF" aria-label="Search" required v-model="search">
-                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                 <input class="form-control mr-sm-2" 
+                  ref="search" 
+                  type="search"
+                  placeholder="Digite o CPF" aria-label="Search"
+                  required 
+                  v-model="search"
+                  v-mask="'###-###-###-##'">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&nbsp;&nbsp;
+                 <button class="btn btn-outline-warning my-2 my-sm-0" @click="resetForm()" type="button">Limpar</button>
            </form>
         </nav>
     </div>
@@ -23,6 +30,11 @@
         methods:{
              HandleSearch(){
                   this.$emit("changeMsg", this.search);
+             },
+
+             resetForm(){
+                 this.search = '';
+                 localStorage.setItem('resetForm',true)
              }
         }
     }

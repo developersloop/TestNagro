@@ -31,7 +31,7 @@
                                 </td>
                                   <td>{{ dt.id }}</td>
                                   <td>{{ dt.name }}</td>
-                                  <td>{{ dt.cpf }}</td>
+                                  <td><input  id="cpf" type="text" class="text-center"  v-mask="'###-###-###-##'" v-model="dt.cpf"></td>
                                   <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                             <tr v-else>
@@ -130,8 +130,6 @@ import Modal from '../Modal/Modal';
                  cpf:'cpf não encontrado!'
               }
              this.searchTop.push(err)
-
-             console.log(this.searchTop);
           }
          }
     },
@@ -145,8 +143,8 @@ import Modal from '../Modal/Modal';
                          return data;
                      } else {
                         _.forEach(this.$store.getters.getCad[0],function(value){
-                        data.push(value);
-                    })
+                           data.push(value);
+                         })
                            reference.data.push(data);
                            localStorage.setItem('length-paginate',data.length);
                            return this.data[1];
@@ -157,8 +155,6 @@ import Modal from '../Modal/Modal';
                      })
                      return _.orderBy(data, this.nameColumn, this.order)
                 } 
-
-                console.log('adad');
              },
                rows: function() {
                     return  localStorage.getItem('length-paginate');
@@ -167,4 +163,15 @@ import Modal from '../Modal/Modal';
       
      }
 </script>
+
+<style scopped>
+    #cpf{
+       border:none;
+       outline: none;
+    }
+    #cpf:active{
+      outline: none;
+      border:none;
+    }
+</style>
 
