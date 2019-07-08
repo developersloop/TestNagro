@@ -80,7 +80,7 @@ import Modal from '../Modal/Modal';
                              case 'name':
                                this.iconName = icon;
                              break;
-                              case 'total_area':
+                              case 'cpf':
                                this.iconCpf = icon;
                              break;
                            
@@ -97,8 +97,8 @@ import Modal from '../Modal/Modal';
                              case 'name':
                                this.iconName = 'caret-up'
                              break;
-                              case 'total_area':
-                               this.iconArea = 'caret-up'
+                              case 'cpf':
+                               this.iconCpf = 'caret-up'
                              break;
                             
                          }
@@ -107,8 +107,9 @@ import Modal from '../Modal/Modal';
                 }
             
          },
-         HandleSearch(msg){
-           console.log(msg);
+         HandleSearch(cpf){
+          const find =  _.find(this.data[1], ['cpf', cpf]);
+          localStorage.setItem('find_search',JSON.stringify(find))
          }
     },
          computed:{
@@ -127,6 +128,9 @@ import Modal from '../Modal/Modal';
                           data.push(value);
                      })
                      return _.orderBy(data, this.nameColumn, this.order)
+                } 
+                if(this.HandleSearch){
+                  console.log('adad1111');
                 }
              },
                rows: function() {
