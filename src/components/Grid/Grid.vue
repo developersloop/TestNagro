@@ -7,7 +7,7 @@
                       <Table>
                             <thead class="thead-dark text-center" slot="thead">
                               <!-- {{ ord }} -->
-                              <tr>
+                              <tr v-if="!err">
                                   <th scope="col">#</th>
                                   <th scope="col">Id <span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
                                   <th scope="col">Name <span ref="name"  @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
@@ -15,17 +15,27 @@
                                   <th scope="col">Propriedades</th>
                                   
                               </tr>
+                              <tr v-else>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Id</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Cpf</th>
+                                  <th scope="col">Propriedades</th>
+                              </tr>
                           </thead>
                            <tbody class="text-center" slot="tbody">
-                            <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
-                                <td>
+                            <tr v-if="err" class="text-center">
+                                <td colspan="5"><span style="color:red"><b>Termo Pesquisado inválido</b></span></td>
+                            </tr>
+                            <tr v-for="(dt, index) in GetAll" :key="`people-${index}`" v-else>
+                                <td v-if="!err">
                                     <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
-                                <td>{{ dt.cpf }}</td>
+                                <td><input style="border:none; outline: none;" v-mask="'###.###.###-##'" type="text" v-model="dt.cpf" id="mask_cpf"></td>
                                 <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                         </tbody>
@@ -115,12 +125,6 @@ import Modal from '../Modal/Modal';
               this.searchTop.push(find);
           } else {
               this.err = true;
-              const err = {
-                 id:'id não encontrado!',
-                 name:'name não encontrado!',
-                 cpf:'cpf não encontrado!'
-              }
-             this.searchTop.push(err)
           }
          }
     },
@@ -156,11 +160,11 @@ import Modal from '../Modal/Modal';
 </script>
 
 <style scopped>
-    #cpf{
+    #mask-cpf{
        border:none;
        outline: none;
     }
-    #cpf:active{
+    #mask-cpf:active{
       outline: none;
       border:none;
     }
