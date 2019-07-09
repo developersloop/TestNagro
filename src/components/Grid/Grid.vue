@@ -5,7 +5,7 @@
              <div class="row">
                 <div class="col-md-12 text-center">
                       <Table>
-                            <thead class="thead-dark text-center" v-slot:"thead">
+                            <thead class="thead-dark text-center" slot="thead">
                               <!-- {{ ord }} -->
                               <tr>
                                   <th scope="col">#</th>
@@ -16,6 +16,19 @@
                                   
                               </tr>
                           </thead>
+                           <tbody class="text-center" slot="tbody">
+                            <tr v-for="(dt, index) in GetAll" :key="`people-${index}`">
+                                <td>
+                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
+                                    <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
+                                    <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
+                                </td>
+                                <td>{{ dt.id }}</td>
+                                <td>{{ dt.name }}</td>
+                                <td>{{ dt.cpf }}</td>
+                                <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
+                            </tr>
+                        </tbody>
                       </Table>
                     <Modal title = 'cadastro'/>
                 </div>
