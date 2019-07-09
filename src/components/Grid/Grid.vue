@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar  @changeMsg="HandleSearch"/>
+        <Navbar  @changeMsg="HandleSearch" @returnData="returnSearch"/>
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12 text-center">
@@ -126,6 +126,10 @@ import Modal from '../Modal/Modal';
           } else {
               this.err = true;
           }
+         },
+
+         returnSearch(cpf){
+             this.searchTop = [];
          }
     },
          computed:{
@@ -136,14 +140,14 @@ import Modal from '../Modal/Modal';
                     if(this.searchTop.length > 0){
                          data.push(this.searchTop[0]);
                          return data;
-                     } else {
-                        _.forEach(this.$store.getters.getCad[0],function(value){
+                    } else {
+                      _.forEach(this.$store.getters.getCad[0],function(value){
                            data.push(value);
                          })
                            reference.data.push(data);
                            localStorage.setItem('length-paginate',data.length);
                            return this.data[1];
-                     }
+                    }
                 } else {
                      _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);

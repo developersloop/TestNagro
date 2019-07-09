@@ -34,7 +34,7 @@
 
              resetForm(){
                  this.search = '';
-                 localStorage.setItem('resetForm',true)
+                  this.$emit("returnData", this.search);
              }
         }
     }
