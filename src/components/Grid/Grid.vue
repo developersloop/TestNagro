@@ -3,48 +3,26 @@
         <Navbar  @changeMsg="HandleSearch"/>
          <div class="container" style="widht:100%;">
              <div class="row">
-                <div class="col-md-12">
-                   <Table>
-                       <thead class="thead-dark text-center" slot="thead">
-                            <!-- {{ ord }} -->
-                            <tr v-if="!err">
-                                <th scope="col">#</th>
-                                <th scope="col">Id <span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
-                                <th scope="col">Name <span ref="name"  @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
-                                <th scope="col">Cpf <span ref="cpf"  @click="Order(order,'cpf','caret-down',icon)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
-                                <th scope="col">Propriedades</th>
-                                
-                            </tr>
-                            <tr v-else>
-                                <th scope="col">Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Cpf</th>
-                                <th scope="col">Propriedades</th>
-                            </tr>
-                        </thead>
-                          <tbody class="text-center" slot="tbody">
-                             <tr  v-for="(dt, index) in GetAll" :key="`people-${index}`" v-if="!err">
-                                <td>
-                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm" ref="save"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
-                                </td>
-                                  <td>{{ dt.id }}</td>
-                                  <td>{{ dt.name }}</td>
-                                  <td><input  id="cpf" type="text" class="text-center"  v-mask="'###.###.###-##'" v-model="dt.cpf"></td>
-                                  <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
-                            </tr>
-                            <tr v-else>
-                                <td colspan="5" class="text-center"><span style="color:red;"><b>Termo pesquisado inexistente!</b></span></td>
-                            </tr>
-                        </tbody>
-                   </Table>
+                <div class="col-md-12 text-center">
+                      <Table>
+                            <thead class="thead-dark text-center" v-slot:"thead">
+                              <!-- {{ ord }} -->
+                              <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Id <span ref="id" @click="Order(order,'id','caret-down',icon)" class="icon"><icon v-bind:name="icon" scale="1"/></span></th>
+                                  <th scope="col">Name <span ref="name"  @click="Order(order,'name','caret-down',icon)" class="icon"> <icon v-bind:name="iconName" scale="1"/></span></th>
+                                  <th scope="col">Cpf <span ref="cpf"  @click="Order(order,'cpf','caret-down',icon)" class="icon"> <icon  v-bind:name="iconCpf"/></span></th>
+                                  <th scope="col">Propriedades</th>
+                                  
+                              </tr>
+                          </thead>
+                      </Table>
                     <Modal title = 'cadastro'/>
                 </div>
              </div>
-             <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
+             <!-- <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
                   <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="users"/>
-             </div>
+             </div> -->
          </div>
     </div>
 </template>

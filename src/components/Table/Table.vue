@@ -1,9 +1,9 @@
 <template>
     <div>
-        <table class="table" id="users">
-             <slot name="thead"  class="thead-dark text-center"></slot>
+        <b-table striped hover>
+             <slot name="thead" class="thead-dark text-center"></slot>
              <slot name="tbody"></slot>
-        </table>
+        </b-table>
     </div>
 </template>
 
