@@ -129,6 +129,7 @@ import Modal from '../Modal/Modal';
          },
 
          returnSearch(cpf){
+             this.err = false;
              this.searchTop = [];
          }
     },
