@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table striped>
+        <table class="table">
              <slot name="thead" class="thead-dark text-center"></slot>
              <slot name="tbody"></slot>
         </table>
