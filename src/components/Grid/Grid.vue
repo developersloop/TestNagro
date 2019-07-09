@@ -43,9 +43,12 @@
                     <Modal title = 'cadastro'/>
                 </div>
              </div>
-             <!-- <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
-                  <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="users"/>
-             </div> -->
+             <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
+                 <p>
+  <button @click="prevPage">Previous</button> 
+  <button @click="nextPage">Next</button>
+  </p>
+             </div>
          </div>
     </div>
 </template>
@@ -64,8 +67,8 @@ import Modal from '../Modal/Modal';
          },
          data(){
              return {
-                 perPage: 2, // por pagina
-                 currentPage: 1, // pagina no atual momento :)
+                 pageSize:3,
+            currentPage:1,
                  data:[],
                  order : 'asc',
                  icon:'caret-up',
@@ -82,6 +85,12 @@ import Modal from '../Modal/Modal';
          methods:{
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
+            nextPage:function() {
+      if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
+    },
+    prevPage:function() {
+      if(this.currentPage > 1) this.currentPage--;
+    },
           Order(order,nameColumn,icon,){    
                             
                 if(order === 'asc'){
@@ -138,27 +147,29 @@ import Modal from '../Modal/Modal';
                  const reference = this;
                  const data = [];
                 if(this.nameColumn === ''){
-                    if(this.searchTop.length > 0){
-                         data.push(this.searchTop[0]);
-                         return data;
-                    } else {
-                      _.forEach(this.$store.getters.getCad[0],function(value){
+                     _.forEach(this.$store.getters.getCad[0],function(value){
                            data.push(value);
                          })
                            reference.data.push(data);
-                           localStorage.setItem('length-paginate',data.length);
-                           return this.data[1];
-                    }
+                            return data.sort((a,b) => {
+                            let modifier = 1;
+                                  if(this.order === 'desc') modifier = -1;
+                                  if(a[this.nameColumn] < b[this.nameColumn]) return -1 * modifier;
+                                  if(a[this.nameColumn] > b[this.nameColumn]) return 1 * modifier;
+                                  return 0;
+                                }).filter((row, index) => {
+                                  let start = (this.currentPage-1)*this.pageSize;
+                                  let end = this.currentPage*this.pageSize;
+                                  if(index >= start && index < end) return true;
+                                });
+                         
                 } else {
                      _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);
                      })
                      return _.orderBy(data, this.nameColumn, this.order)
                 } 
-             },
-               rows: function() {
-                    return  localStorage.getItem('length-paginate');
-            }
+             }
          }
       
      }
