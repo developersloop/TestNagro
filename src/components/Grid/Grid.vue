@@ -44,10 +44,10 @@
                 </div>
              </div>
              <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
-                 <p>
-  <button @click="prevPage">Previous</button> 
-  <button @click="nextPage">Next</button>
-  </p>
+                 <div class="pagination">
+                    <button @click="prevPage">❮</button> 
+                    <button @click="nextPage">❯</button>
+                 </div>
              </div>
          </div>
     </div>
@@ -86,11 +86,11 @@ import Modal from '../Modal/Modal';
             ...mapActions(['Grower','persisteApi']),
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
-      if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
-    },
-    prevPage:function() {
-      if(this.currentPage > 1) this.currentPage--;
-    },
+              if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
+            },
+            prevPage:function() {
+              if(this.currentPage > 1) this.currentPage--;
+            },
           Order(order,nameColumn,icon,){    
                             
                 if(order === 'asc'){
@@ -147,29 +147,37 @@ import Modal from '../Modal/Modal';
                  const reference = this;
                  const data = [];
                 if(this.nameColumn === ''){
-                     _.forEach(this.$store.getters.getCad[0],function(value){
+                    if(this.searchTop.length > 0){
+                         data.push(this.searchTop[0]);
+                         return data;
+                    } else {
+                      _.forEach(this.$store.getters.getCad[0],function(value){
                            data.push(value);
                          })
                            reference.data.push(data);
                             return data.sort((a,b) => {
-                            let modifier = 1;
-                                  if(this.order === 'desc') modifier = -1;
-                                  if(a[this.nameColumn] < b[this.nameColumn]) return -1 * modifier;
-                                  if(a[this.nameColumn] > b[this.nameColumn]) return 1 * modifier;
-                                  return 0;
-                                }).filter((row, index) => {
-                                  let start = (this.currentPage-1)*this.pageSize;
-                                  let end = this.currentPage*this.pageSize;
-                                  if(index >= start && index < end) return true;
-                                });
+                                let modifier = 1;
+                                if(this.order === 'desc') modifier = -1;
+                                if(a[this.nameColumn] < b[this.nameColumn]) return -1 * modifier;
+                                if(a[this.nameColumn] > b[this.nameColumn]) return 1 * modifier;
+                                return 0;
+                              }).filter((row, index) => {
+                                let start = (this.currentPage-1)*this.pageSize;
+                                let end = this.currentPage*this.pageSize;
+                                if(index >= start && index < end) return true;
+                              });
                          
+                    }
                 } else {
                      _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);
                      })
                      return _.orderBy(data, this.nameColumn, this.order)
                 } 
-             }
+             },
+               rows: function() {
+                    return  localStorage.getItem('length-paginate');
+            }
          }
       
      }
@@ -184,5 +192,21 @@ import Modal from '../Modal/Modal';
       outline: none;
       border:none;
     }
+
+  .pagination button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+.pagination button:hover:not(.active) {background-color: #ddd;}
+
+  .pagination button.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
 </style>
 
