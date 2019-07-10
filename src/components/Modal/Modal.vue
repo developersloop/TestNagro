@@ -21,15 +21,36 @@
                         placeholder="Enter cpf"
                        ></b-form-input>
                 </b-form-group>
-
-                  <select v-model="selected">
-                    <option
-                        v-for="pro in getPrp"
-                        :key="pro.id" 
-                        :value="pro.name">
-                        <!-- {{ account.conta }} - {{ account.descricao_conta }} -->
-                    </option>
-                </select>
+                <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="status"
+                    name="checkbox-1"
+                    value="accepted"
+                    unchecked-value="not_accepted">
+                    Cadastrar nova Propriedade?
+                </b-form-checkbox>
+                <div v-if="status == 'accepted'" style="margin-top:20px;">
+                     <b-card class="mt-3" header="Cadastar Propriedade">
+                        <b-form-group>
+                            <b-form-input
+                                id="input-1"
+                                v-model="name"
+                                type="text"
+                                required
+                                placeholder="Enter Name"
+                            ></b-form-input>
+                        </b-form-group>
+                        <b-form-group>
+                             <b-form-input
+                                id="input-1"
+                                v-model="total_area"
+                                type="text"
+                                required
+                                placeholder="Enter Total Área"
+                            ></b-form-input>
+                        </b-form-group>
+                    </b-card>
+                </div>
               
                 <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
                  <b-form-group>
@@ -55,9 +76,11 @@ import { parse } from 'path';
          data(){
              return {
                  name:'',
+                 total_area:'',
                  cpf:'',
                  data:[],
-                 selected:null
+                 selected:null,
+                 status:'not_accepted'
              }
          },
          mounted(){
@@ -69,7 +92,7 @@ import { parse } from 'path';
              const dataArray = [];
              const options = [];
              var a = [];
-                return axios.get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{
+                return  axios.get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{
                     headers: {
                     'Access-Control-Allow-Origin': '*',
                     },
@@ -82,8 +105,6 @@ import { parse } from 'path';
                          _.forEach(dataArray[0],function(value){
                              a.push(value)
                         })
-                        
-                       return a;
                             
                 })
                   .catch(err => console.log(err))
