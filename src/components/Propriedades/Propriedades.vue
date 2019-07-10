@@ -4,8 +4,15 @@
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
-                        <thead class="thead-dark text-center">
+                     <div class="btn-container">
+                          <div>
+                                <button class="btn btn-dark"><span>❮</span>
+                                    <router-link :to="{name:'Grid'}" id="link">Voltar</router-link>
+                                </button>
+                          </div>
+                     </div>
+                    <Table>
+                        <thead class="thead-dark text-center" slot="thead">
                             <!-- {{ ord }} -->
                             <tr>
                                 <th scope="col">#</th>
@@ -16,20 +23,21 @@
                                 
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody class="text-center" slot="tbody">
                             <tr v-for="(dt, index) in getAll" :key="`properties${index}`">
                                 <td>
                                     <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
-                                <td >{{ dt.id }}</td>
+                                <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
                                 <td>{{ dt.total_area }}</td>
                                 <td>{{ dt.city }}</td> 
                             </tr>
                         </tbody>
-                    </table>
+                    </Table>
+                  
                 </div>
              </div>
     </div>
@@ -40,10 +48,12 @@
 /* eslint-disable */
 import Navbar from '../Navbar/Navbar';
 import { mapActions,mapGetters } from 'vuex'; 
+import Table from '../Table/Table';
 import _ from 'lodash';
     export default {
         components:{
-            "Navbar":Navbar
+            "Navbar":Navbar,
+            "Table":Table
         },
         data(){
             return { 
@@ -53,7 +63,8 @@ import _ from 'lodash';
                  iconName:'caret-up',
                  iconArea:'caret-up',
                  iconCity:'caret-up',
-                 nameColumn:''
+                 nameColumn:'',
+                
             }
         },
         mounted(){
@@ -137,3 +148,19 @@ import _ from 'lodash';
 
     }
 </script>
+
+<style scopped>
+    #link{
+        text-decoration: none;
+        color:aliceblue;
+        box-sizing: border-box;
+        padding-left: 3px;
+    }
+
+    .btn-container{
+        display: flex;
+        flex-flow:row wrap;
+        justify-content: flex-end;
+        margin-bottom: 14px;
+    }
+</style>
