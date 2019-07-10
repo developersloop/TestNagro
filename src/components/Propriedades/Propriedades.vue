@@ -6,9 +6,11 @@
                 <div class="col-md-12">
                      <div class="btn-container">
                           <div>
-                                <button class="btn btn-dark"><span>❮</span>
-                                    <router-link :to="{name:'Grid'}" id="link">Voltar</router-link>
-                                </button>
+                              <router-link :to="{name:'Grid'}" id="link">
+                                     <button class="btn btn-dark"><span>❮</span>
+                                         Voltar
+                                   </button>
+                              </router-link>
                           </div>
                      </div>
                     <Table>
