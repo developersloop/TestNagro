@@ -28,14 +28,17 @@
                                 <td colspan="5"><span style="color:red"><b>Termo Pesquisado inválido</b></span></td>
                             </tr>
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`" v-else>
-                                <td v-if="!err">
+                                <td>
                                     <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
                                     <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
                                     <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
-                                <td><input style="border:none; outline: none;" v-mask="'###.###.###-##'" type="text" v-model="dt.cpf" id="mask_cpf"></td>
+                                 <span v-if="!cP">
+                                     <td><input style="border:none; outline: none;" v-mask="'###.###.###-##'" type="text" v-model="dt.cpf" readonly></td>
+                                 </span>
+                                   <td v-else><input style="border:none; outline: none;" v-mask="'###.###.###-##'" type="text" v-model="dt.cpf" readonly></td>
                                 <td><router-link :to="{name:'Propriedades', params: { id: dt.id}}"><span style="color:black;"><icon style="cursor:pointer" name="arrow-right"/></span></router-link></td>
                             </tr>
                         </tbody>
@@ -68,7 +71,8 @@ import Modal from '../Modal/Modal';
          data(){
              return {
                  pageSize:3,
-            currentPage:1,
+                 currentPage:1,
+                 cP:false,
                  data:[],
                  order : 'asc',
                  icon:'caret-up',
@@ -87,11 +91,13 @@ import Modal from '../Modal/Modal';
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
               if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
+              this.cP = true;
             },
             prevPage:function() {
               if(this.currentPage > 1) this.currentPage--;
+              this.cP = false;
             },
-          Order(order,nameColumn,icon,){    
+          Order(order,nameColumn,icon){    
                             
                 if(order === 'asc'){
                          switch (nameColumn) {
@@ -146,6 +152,7 @@ import Modal from '../Modal/Modal';
              GetAll: function(){
                  const reference = this;
                  const data = [];
+                 const dataPagination = [];
                 if(this.nameColumn === ''){
                     if(this.searchTop.length > 0){
                          data.push(this.searchTop[0]);
@@ -168,22 +175,33 @@ import Modal from '../Modal/Modal';
                               });
                          
                     }
-                } else {
-                     _.forEach(this.$store.getters.getCad[0],function(value){
+                } 
+                 _.forEach(this.$store.getters.getCad[0],function(value){
                           data.push(value);
                      })
-                     return _.orderBy(data, this.nameColumn, this.order)
-                } 
+                     
+                     return _.orderBy(data.sort((a,b) => {
+                                let modifier = 1;
+                                if(this.order === 'desc') modifier = -1;
+                                if(a[this.nameColumn] < b[this.nameColumn]) return -1 * modifier;
+                                if(a[this.nameColumn] > b[this.nameColumn]) return 1 * modifier;
+                                return 0;
+                              }).filter((row, index) => {
+                                let start = (this.currentPage-1)*this.pageSize;
+                                let end = this.currentPage*this.pageSize;
+                                if(index >= start && index < end) return true;
+                              }),this.nameColumn, this.order);
              },
-               rows: function() {
-                    return  localStorage.getItem('length-paginate');
-            }
          }
       
      }
 </script>
 
 <style scopped>
+
+ table > td{
+    border-top: 0px;
+ }
     #mask-cpf{
        border:none;
        outline: none;

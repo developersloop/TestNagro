@@ -16,3 +16,9 @@
          }
      }
 </script>
+
+<style>
+     .table th, .table td{
+         border-top:none;
+     }
+</style>
