@@ -30,14 +30,14 @@
                     Cadastrar nova Propriedade?
                 </b-form-checkbox>
                 <div v-if="status == 'accepted'" style="margin-top:20px;">
-                     <b-card class="mt-3" header="Cadastar Propriedade">
+                     <b-card class="mt-3" header="Cadastar Propriedade" style="margin-bottom:20px;">
                         <b-form-group>
                             <b-form-input
                                 id="input-1"
                                 v-model="name"
                                 type="text"
                                 required
-                                placeholder="Enter Name"
+                                placeholder="Digite seu Nome"
                             ></b-form-input>
                         </b-form-group>
                         <b-form-group>
@@ -46,7 +46,16 @@
                                 v-model="total_area"
                                 type="text"
                                 required
-                                placeholder="Enter Total Área"
+                                placeholder="Digite o Total da Área"
+                            ></b-form-input>
+                        </b-form-group>
+                          <b-form-group>
+                             <b-form-input
+                                id="input-1"
+                                v-model="city"
+                                type="text"
+                                required
+                                placeholder="Digite a Cidade"
                             ></b-form-input>
                         </b-form-group>
                     </b-card>
@@ -78,6 +87,7 @@ import { parse } from 'path';
                  name:'',
                  total_area:'',
                  cpf:'',
+                 city:'',
                  data:[],
                  selected:null,
                  status:'not_accepted'
