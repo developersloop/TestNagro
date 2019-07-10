@@ -21,6 +21,16 @@
                         placeholder="Enter cpf"
                        ></b-form-input>
                 </b-form-group>
+
+                  <select v-model="selected">
+                    <option
+                        v-for="pro in getPrp"
+                        :key="pro.id" 
+                        :value="pro.name">
+                        <!-- {{ account.conta }} - {{ account.descricao_conta }} -->
+                    </option>
+                </select>
+              
                 <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
                  <b-form-group>
                       <b-button type="submit" variant="primary">Enviar</b-button>&nbsp;
@@ -34,6 +44,10 @@
 
 <script>
      import {mapActions} from 'vuex';
+     import axios from 'axios';
+     import _ from 'lodash';
+import { parse } from 'path';
+
      export default {
          props:[
              'title',
@@ -42,6 +56,37 @@
              return {
                  name:'',
                  cpf:'',
+                 data:[],
+                 selected:null
+             }
+         },
+         mounted(){
+
+         },
+         computed:{
+             getPrp(){
+                    const reference = this;
+             const dataArray = [];
+             const options = [];
+             var a = [];
+                return axios.get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{
+                    headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    },
+                    proxy: {
+                    host: 'http://localhost:8080/',
+                    port: 8080
+                    }
+                }).then(function(data){
+                    dataArray.push(data.data);
+                         _.forEach(dataArray[0],function(value){
+                             a.push(value)
+                        })
+                        
+                       return a;
+                            
+                })
+                  .catch(err => console.log(err))
              }
          },
          methods:{
