@@ -28,7 +28,7 @@ const mutations = {
 };
 
 const actions = {
-   persisteApi({commit}){
+   getUsers({commit}){
      Services.getGrower()
      .then(data => commit(ADD_RESPONSE,data))
      .catch(err => commit(ADD_RESPONSE,err));

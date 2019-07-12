@@ -88,10 +88,10 @@ import Modal from '../Modal/Modal';
              }
          },
          mounted(){
-             this.persisteApi();
+             this.getUsers();
          },
          methods:{
-            ...mapActions(['Grower','persisteApi']),
+            ...mapActions(['Grower','getUsers']),
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
               if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
