@@ -4,6 +4,11 @@
          <div class="container" style="widht:100%;">
              <div class="row">
                 <div class="col-md-12 text-center">
+                    <div class="btn-container">
+                          <div>
+                               <button v-b-modal.modal-1 class="btn btn-outline-dark btn-md">Novo Registro</button>
+                          </div>
+                     </div>
                       <Table>
                             <thead class="thead-dark text-center" slot="thead">
                               <!-- {{ ord }} -->
@@ -29,9 +34,8 @@
                             </tr>
                             <tr v-for="(dt, index) in GetAll" :key="`people-${index}`" v-else>
                                 <td>
-                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
+                                    <button class="btn btn-info btn-sm">Editar&nbsp;<icon style="margin-top:-5px;" name="pen" scale="0.7"/></button> &nbsp;
+                                    <button class="btn btn-danger btn-sm">Excluir&nbsp;<icon style="margin-top:-5px;" name="trash" scale="0.7"/></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
@@ -103,34 +107,42 @@ import Modal from '../Modal/Modal';
                          switch (nameColumn) {
                              case 'id':
                                this.icon = icon;
+                               this.cP = true;
                              break;
                              case 'name':
                                this.iconName = icon;
+                                 this.cP = true;
                              break;
                               case 'cpf':
                                this.iconCpf = icon;
+                                 this.cP = true;
                              break;
                            
                          }
                        
                           this.order = 'desc'
                           this.nameColumn = nameColumn
+                          this.cP = true;
                      }
                 else if (order === 'desc'){
                      switch (nameColumn) {
                              case 'id':
                                this.icon = 'caret-up'
+                                 this.cP = true;
                              break;
                              case 'name':
                                this.iconName = 'caret-up'
+                                 this.cP = true;
                              break;
                               case 'cpf':
                                this.iconCpf = 'caret-up'
+                                 this.cP = true;
                              break;
                             
                          }
                        this.order = 'asc'
                        this.nameColumn = nameColumn
+                       this.cP = true;
                 }
             
          },
@@ -197,7 +209,7 @@ import Modal from '../Modal/Modal';
      }
 </script>
 
-<style scopped>
+<style scoped>
 
  table > td{
     border-top: 0px;
@@ -226,5 +238,11 @@ import Modal from '../Modal/Modal';
     color: white;
     border: 1px solid #4CAF50;
   }
+    .btn-container{
+        display: flex;
+        flex-flow:row wrap;
+        justify-content: flex-start;
+        margin-bottom: 14px;
+    }
 </style>
 

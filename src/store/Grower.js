@@ -28,6 +28,10 @@ const actions = {
      .catch(err => commit(ADD_RESPONSE,err));
    },
 
+   persisteData({commit},data){
+        console.log(data);
+   }
+
 };
 
 const getters = {

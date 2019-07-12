@@ -28,9 +28,9 @@
                         <tbody class="text-center" slot="tbody">
                             <tr v-for="(dt, index) in getAll" :key="`properties${index}`">
                                 <td>
-                                    <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-info btn-sm"><icon style="margin-top:-5px;" name="pen" scale="1"/></button> &nbsp;
-                                    <button class="btn btn-danger btn-sm"><icon style="margin-top:-5px;" name="trash" scale="1"/></button>
+                                    <!-- <button v-b-modal.modal-1 class="btn btn-success btn-sm"><icon style="margin-top:-5px;" name="save" scale="1"/></button> &nbsp; -->
+                                    <button class="btn btn-info btn-sm">Editar&nbsp;<icon style="margin-top:-5px;" name="pen" scale="0.7"/></button>&nbsp;
+                                    <button class="btn btn-danger btn-sm">Excluir&nbsp;<icon style="margin-top:-5px;" name="trash" scale="0.7"/></button>
                                 </td>
                                 <td>{{ dt.id }}</td>
                                 <td>{{ dt.name }}</td>
@@ -151,7 +151,7 @@ import _ from 'lodash';
     }
 </script>
 
-<style scopped>
+<style scoped>
     #link{
         text-decoration: none;
         color:aliceblue;

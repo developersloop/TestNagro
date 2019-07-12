@@ -9,7 +9,7 @@
                     v-model="name"
                     type="text"
                     required
-                    placeholder="Enter Name"
+                    placeholder="Digite o Nome"
                     ></b-form-input>
                </b-form-group>
                 <b-form-group>
@@ -18,8 +18,14 @@
                         v-model="cpf"
                         type="text"
                         required
-                        placeholder="Enter cpf"
+                        placeholder="Digite o Cpf"
                        ></b-form-input>
+                </b-form-group>
+                 <b-form-group>
+                     <select v-model="select" required class="form-control" name="propriedade" id="propriedades">
+                        <option value="" disabled selected>Escolha uma Propriedade</option>
+                         <option v-for="data in options" :key="`${data.id}-${data.name}`" :value="data.id">{{ data.name }}</option>
+                    </select>
                 </b-form-group>
                 <b-form-checkbox
                     id="checkbox-1"
@@ -34,10 +40,10 @@
                         <b-form-group>
                             <b-form-input
                                 id="input-1"
-                                v-model="name"
+                                v-model="name_propriedade"
                                 type="text"
                                 required
-                                placeholder="Digite seu Nome"
+                                placeholder="Digite o Nome da Propriedade"
                             ></b-form-input>
                         </b-form-group>
                         <b-form-group>
@@ -64,7 +70,7 @@
                 <div style="display:flex; flex-flow:row wrap; justify-content:flex-end;">
                  <b-form-group>
                       <b-button type="submit" variant="primary">Enviar</b-button>&nbsp;
-                      <b-button type="reset" variant="danger">Resetar</b-button>
+                      <b-button type="reset" variant="danger" @click="reset">Resetar</b-button>
                 </b-form-group>
                 </div>
             </b-form>
@@ -85,45 +91,61 @@ import { parse } from 'path';
          data(){
              return {
                  name:'',
+                 name_propriedade:'',
                  total_area:'',
                  cpf:'',
                  city:'',
-                 data:[],
-                 selected:null,
+                 options:[],
+                 select:'',
                  status:'not_accepted'
              }
          },
-         mounted(){
-
-         },
-         computed:{
-             getPrp(){
-                    const reference = this;
-             const dataArray = [];
-             const options = [];
-             var a = [];
-                return  axios.get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{
-                    headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    },
-                    proxy: {
-                    host: 'http://localhost:8080/',
-                    port: 8080
-                    }
-                }).then(function(data){
-                    dataArray.push(data.data);
-                         _.forEach(dataArray[0],function(value){
-                             a.push(value)
-                        })
-                            
-                })
-                  .catch(err => console.log(err))
-             }
-         },
+         mounted(){this.getPrp();},
+         computed:{},
          methods:{
                ...mapActions(['Grower','persisteData']),
              HandlePost(){
-                 this.persisteData();
+                 const name = this.name;
+                 const cpf = this.cpf;
+                 const name_propriedade = this.name_propriedade;
+                 const total_area = this.total_area;
+                 const city = this.city;
+                 const select = this.select;
+                 const data = {
+                    name,
+                    cpf,
+                    name_propriedade,
+                    city,
+                    select
+
+                 }
+                 this.persisteData(data);
+             },
+             reset(){
+                 this.status = 'accept'
+                 this.cpf = ''
+                 this.city = ''
+                 this.name_propriedade = '';
+                 this.total_area = '';
+                 this.name = '';
+
+                 },   
+              getPrp(){
+                    const ref = this;
+                    const reference = this;
+                    const dataArray = [];
+                    const options = [];
+                    var a = [];
+                    axios.get(`https://my-json-server.typicode.com/pedroskakum/fake-api/properties`,{headers: {'Access-Control-Allow-Origin': '*',},proxy: {host: 'http://localhost:8080/',port: 8080}
+                }).then(function(data){
+                    // const ref = this;
+                    dataArray.push(data.data);
+                         _.forEach(dataArray[0],function(value){
+                            ref.options.push(value);
+                        })  
+                })
+                  .catch(err => console.log(err))
+                
              }
          }
      }
