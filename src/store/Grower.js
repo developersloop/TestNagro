@@ -17,7 +17,13 @@ const mutations = {
         state.err = params;
     },
     [POST_DATA](state, ...params){
-        state.cad.push(params);
+        console.log(params[0]);
+        const teste = [{
+            cpf: "121.212.121-21",
+            id: 6,
+            name: "qeqe"
+        }]
+        state.cad.push(teste);
     }
 };
 
