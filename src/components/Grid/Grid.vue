@@ -6,7 +6,7 @@
                 <div class="col-md-12 text-center">
                     <div class="btn-container">
                           <div>
-                               <button v-b-modal.modal-1 class="btn btn-outline-dark btn-md">Novo Registro</button>
+                               <button v-b-modal.modal-1 class="btn btn-dark btn-md">Novo Registro</button>
                           </div>
                      </div>
                       <Table>
