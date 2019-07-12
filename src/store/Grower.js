@@ -3,7 +3,33 @@ import *  as Services from '../functions/GrowerApi';
 const GET_RESPONSE = 'GET_RESPONSE'
 const POST_DATA = 'POST_DATA';
 const state = {
-    cad:[],
+    cad:[
+            {
+                id: 1,
+                name: "Julio Henry Peixoto",
+                cpf: "32034485050"
+            },
+            {
+                id: 2,
+                name: "Aparecida Sara Jennifer Pires",
+                cpf: "02162914026"
+            },
+            {
+                id: 3,
+                name: "Henrique Benjamin Bento Nascimento",
+                cpf: "78530550056"
+            },
+            {
+                id: 4,
+                name: "Nelson Fernando Nogueira",
+                cpf: "13430762006"
+            },
+            {
+                id: 5,
+                name: "Julia Lorena Luiza Lima",
+                cpf: "80714138010"
+            }
+        ],
     err:[],
     initial:false
 };
@@ -13,16 +39,16 @@ const mutations = {
         state.cad.push(params[0].data);
     },
     [POST_DATA](state, ...params){
-        state.cad.push(params);
+        state.cad.push({
+            id:params[0].id,
+            name:params[0].name,
+            cpf:params[0].cpf
+        })
     }
 };
 
 const actions = {
-   getUsers({commit}){
-     Services.getGrower()
-     .then(data => commit(GET_RESPONSE,data))
-     .catch(err => commit(GET_RESPONSE,err));
-   },
+ 
 
    persisteData({commit},data){
         Services.postGrower(data)

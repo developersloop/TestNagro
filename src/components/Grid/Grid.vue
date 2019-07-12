@@ -87,14 +87,15 @@ import Modal from '../Modal/Modal';
                  err:false
              }
          },
-         mounted(){
-             this.getUsers();
-         },
+        //  mounted(){
+        //     this.getCad()
+        //  },
          methods:{
-            ...mapActions(['Grower','getUsers']),
+            // ...mapActions(['Grower','getUsers']),
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
-              if((this.currentPage*this.pageSize) < this.data[1].length) this.currentPage++;
+              // console.log(this.data);
+              if((this.currentPage*this.pageSize) < this.data[0].length) this.currentPage++;
               this.cP = true;
             },
             prevPage:function() {
@@ -170,7 +171,7 @@ import Modal from '../Modal/Modal';
                          data.push(this.searchTop[0]);
                          return data;
                     } else {
-                      _.forEach(this.$store.getters.getCad[0],function(value){
+                      _.forEach(this.$store.getters.getCad,function(value){
                            data.push(value);
                          })
                            reference.data.push(data);
@@ -188,7 +189,7 @@ import Modal from '../Modal/Modal';
                          
                     }
                 } 
-                 _.forEach(this.$store.getters.getCad[0],function(value){
+                 _.forEach(this.$store.getters.getCad,function(value){
                           data.push(value);
                      })
                      
