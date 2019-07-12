@@ -3,10 +3,10 @@ import *  as Services from '../functions/GrowerApi';
 const ADD_RESPONSE = 'ADD_RESPONSE'
 const ADD_RESPONSE_ERR = 'ADD_RESPONSE_ERR'
 const ADD_RESPONSE_PERSISTE = 'ADD_RESPONSE_PERSISTE'
+const POST_DATA = 'POST_DATA';
 const state = {
     cad:[],
     err:'',
-    statusCode:''
 };
 
 const mutations = {
@@ -14,10 +14,10 @@ const mutations = {
         state.cad.push(params[0].data);
     },
     [ADD_RESPONSE_ERR](state, ...params){
-        state.cad = params;
+        state.err = params;
     },
-    [ADD_RESPONSE_PERSISTE](state, ...params){
-        state.statusCode = params;
+    [POST_DATA](state, ...params){
+        state.cad.push(params);
     }
 };
 
@@ -29,7 +29,10 @@ const actions = {
    },
 
    persisteData({commit},data){
-        console.log(data);
+        Services.postGrower(data)
+        .then(dt => commit(POST_DATA,dt.data[0]))
+        .catch(err => commit(ADD_RESPONSE,err));
+    
    }
 
 };

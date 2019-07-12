@@ -14,3 +14,16 @@ export function getGrower() {
           })
           
 }
+
+export function postGrower(data){
+  return axios.
+  post('https://my-json-server.typicode.com/pedroskakum/fake-api/grower',data,{
+    headers: {
+       'Access-Control-Allow-Origin': '*',
+     },
+     proxy: {
+       host: 'http://localhost:8080/',
+       port: 8080
+     }
+  })
+}

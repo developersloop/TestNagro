@@ -19,14 +19,15 @@
                         type="text"
                         required
                         placeholder="Digite o Cpf"
+                        v-mask="'###.###.###-##'"
                        ></b-form-input>
                 </b-form-group>
-                 <b-form-group>
+                 <!-- <b-form-group>
                      <select v-model="select" required class="form-control" name="propriedade" id="propriedades">
                         <option value="" disabled selected>Escolha uma Propriedade</option>
                          <option v-for="data in options" :key="`${data.id}-${data.name}`" :value="data.id">{{ data.name }}</option>
                     </select>
-                </b-form-group>
+                </b-form-group> -->
                 <b-form-checkbox
                     id="checkbox-1"
                     v-model="status"
@@ -103,7 +104,7 @@ import { parse } from 'path';
          mounted(){this.getPrp();},
          computed:{},
          methods:{
-               ...mapActions(['Grower','persisteData']),
+               ...mapActions(['postProperties','persisteData']),
              HandlePost(){
                  const name = this.name;
                  const cpf = this.cpf;
@@ -111,15 +112,28 @@ import { parse } from 'path';
                  const total_area = this.total_area;
                  const city = this.city;
                  const select = this.select;
+                 const growerId = '';
                  const data = {
-                    name,
-                    cpf,
-                    name_propriedade,
-                    city,
-                    select
-
+                    grower:[
+                          {   
+                              id:6,
+                              name,
+                              cpf,
+                          }
+                    ],
+                    properties:[
+                         {
+                             id:15,
+                             name_propriedade,
+                             total_area,
+                             city, 
+                             growerId,
+                         }
+                    ],
                  }
-                 this.persisteData(data);
+                 this.persisteData(data.grower);
+                 this.postProperties(data.properties);
+                 this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
              },
              reset(){
                  this.status = 'accept'
