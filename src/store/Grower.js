@@ -6,7 +6,8 @@ const ADD_RESPONSE_PERSISTE = 'ADD_RESPONSE_PERSISTE'
 const POST_DATA = 'POST_DATA';
 const state = {
     cad:[],
-    err:'',
+    err:[],
+    initial:false
 };
 
 const mutations = {
@@ -15,15 +16,10 @@ const mutations = {
     },
     [ADD_RESPONSE_ERR](state, ...params){
         state.err = params;
+        state.initial = false;
     },
     [POST_DATA](state, ...params){
-        console.log(params[0]);
-        const teste = [{
-            cpf: "121.212.121-21",
-            id: 6,
-            name: "qeqe"
-        }]
-        state.cad.push(teste);
+        state.cad.push(params);
     }
 };
 
@@ -46,7 +42,7 @@ const actions = {
 const getters = {
     getCad(){
         return state.cad;
-    }
+    } 
 }
 
 export  const Grower = {
