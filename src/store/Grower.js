@@ -27,7 +27,7 @@ const actions = {
    persisteData({commit},data){
         Services.postGrower(data)
         .then(dt => commit(POST_DATA,dt.data[0]))
-        .catch(err => commit(ADD_RESPONSE,err));
+        .catch(err => console.log(err));
     
    }
 
