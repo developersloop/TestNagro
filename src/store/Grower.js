@@ -44,6 +44,7 @@ const mutations = {
             name:params[0].name,
             cpf:params[0].cpf
         })
+        localStorage.setItem('newData',JSON.stringify(params));
     }
 };
 

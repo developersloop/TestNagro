@@ -171,9 +171,10 @@ import Modal from '../Modal/Modal';
                          data.push(this.searchTop[0]);
                          return data;
                     } else {
-                      _.forEach(this.$store.getters.getCad,function(value){
-                           data.push(value);
+                        _.forEach(this.$store.getters.getCad,function(value){
+                            data.push(value);
                          })
+                          data.push(JSON.parse(localStorage.getItem('newData'))[0])
                            reference.data.push(data);
                             return data.sort((a,b) => {
                                 let modifier = 1;

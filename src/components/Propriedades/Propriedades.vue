@@ -139,8 +139,6 @@ import _ from 'lodash';
 
                         })
                         this.data.push(data);
-                        // console.log(this.data);
-                        console.log(id);
                         return data;
                 } else {
                      _.forEach(this.$store.getters.getProperties[0],function(value){
