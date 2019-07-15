@@ -133,6 +133,7 @@ import { parse } from 'path';
                  }
                  this.persisteData(data.grower);
                  this.postProperties(data.properties);
+                 this.reset();
                  this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
              },
              reset(){
