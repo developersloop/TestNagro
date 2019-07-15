@@ -125,14 +125,22 @@ import _ from 'lodash';
                    const id = this.$route.params.id;
                    if(this.nameColumn === ''){
                     _.forEach(this.$store.getters.getProperties[0],function(value){
-                            for (let index = 0; index < value.length; index++) {
-                                if(value[index].growerId == id){
-                                    data.push(value[index])
+                             if(id !== undefined){
+                                  for (let index = 0; index < value.length; index++) {
+                                    if(value[index].growerId ==  id){
+                                        data.push(value[index])
+                                    } 
                                 }
-                            }
+                             } else {
+                                   for (let index = 0; index < value.length; index++) {
+                                      data.push(value[index])
+                                }
+                             }
+
                         })
                         this.data.push(data);
                         // console.log(this.data);
+                        console.log(id);
                         return data;
                 } else {
                      _.forEach(this.$store.getters.getProperties[0],function(value){

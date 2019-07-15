@@ -15,7 +15,7 @@ const router = new Router({
             },
         },
         {
-            path:'/propriedades/:id',
+            path:'/propriedades/:id?',
             name:'Propriedades',
             component:Propriedades,
             meta:{
