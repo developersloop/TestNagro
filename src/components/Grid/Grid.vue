@@ -95,7 +95,7 @@ import Modal from '../Modal/Modal';
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
               // console.log(this.data);
-              if((this.currentPage*this.pageSize) < this.data[0].length) this.currentPage++;
+              if((this.currentPage*this.pageSize) < this.$store.getters.getCad.length) this.currentPage++;
               this.cP = true;
             },
             prevPage:function() {
