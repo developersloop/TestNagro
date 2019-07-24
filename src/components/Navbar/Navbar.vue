@@ -8,7 +8,7 @@
                  <input class="form-control mr-sm-2" 
                   ref="search" 
                   type="search"
-                  placeholder="Digite o CPF" aria-label="Search"
+                  :placeholder="placeholder" aria-label="Search"
                   required 
                   v-model="search"
                   v-mask="'###.###.###-##'">
@@ -23,10 +23,24 @@
     export default {
         data(){
             return {
-                 search:''
+                 typeSearch :'',
+                 search:'',
+                 placeholder:''
+
             }
         },
 
+        mounted(){
+              const route  = this.$route.path;
+              const params = this.$route.params.id != undefined ? this.$route.params.id : '';
+               if(route === '/'){
+                   this.placeholder = 'Digite seu CPF'
+               } else if(route === '/propriedades'){
+                     this.placeholder  = 'Digite a sua  Propriedade'
+               } else if(params!= undefined && route == `/propriedades/${params}`){
+                     this.placeholder = 'Digite a sua  Propriedade';
+               }
+        },
         methods:{
              HandleSearch(){
                   this.$emit("changeMsg", this.search);
