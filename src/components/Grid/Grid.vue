@@ -95,7 +95,7 @@ import Modal from '../Modal/Modal';
             ...mapGetters(['Grower','getCad']),
             nextPage:function() {
               // console.log(this.data);
-              if((this.currentPage*this.pageSize) < this.$store.getters.getCad.length) this.currentPage++;
+              if((this.currentPage*this.pageSize) < this.data[0].length) this.currentPage++;
               this.cP = true;
             },
             prevPage:function() {
@@ -171,10 +171,9 @@ import Modal from '../Modal/Modal';
                          data.push(this.searchTop[0]);
                          return data;
                     } else {
-                        _.forEach(this.$store.getters.getCad,function(value){
-                            data.push(value);
+                      _.forEach(this.$store.getters.getCad,function(value){
+                           data.push(value);
                          })
-                          data.push(JSON.parse(localStorage.getItem('newData'))[0])
                            reference.data.push(data);
                             return data.sort((a,b) => {
                                 let modifier = 1;
