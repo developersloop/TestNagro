@@ -22,12 +22,12 @@
                         v-mask="'###.###.###-##'"
                        ></b-form-input>
                 </b-form-group>
-                 <!-- <b-form-group>
-                     <select v-model="select" required class="form-control" name="propriedade" id="propriedades">
+                 <b-form-group>
+                     <select v-model="select"  class="form-control" name="propriedade" id="propriedades">
                         <option value="" disabled selected>Escolha uma Propriedade</option>
                          <option v-for="data in options" :key="`${data.id}-${data.name}`" :value="data.id">{{ data.name }}</option>
                     </select>
-                </b-form-group> -->
+                </b-form-group>
                 <b-form-checkbox
                     id="checkbox-1"
                     v-model="status"

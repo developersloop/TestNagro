@@ -69,11 +69,9 @@ import _ from 'lodash';
                 
             }
         },
-        mounted(){
-          this.getAllProperties();
-        },
+      
         methods:{
-            ...mapActions(['Propriedades','getAllProperties']),
+            // ...mapActions(['Propriedades','getAllProperties']),
             ...mapGetters(['Propriedades','getProperties']),
 
               Order(order,nameColumn,icon,nameIcon){    
@@ -123,25 +121,20 @@ import _ from 'lodash';
             getAll(){
                    const data = [];
                    const id = this.$route.params.id;
+                //    console.log(this.$store.getters.getProperties);
                    if(this.nameColumn === ''){
-                    _.forEach(this.$store.getters.getProperties[0],function(value){
+                    _.forEach(this.$store.getters.getProperties,function(value){
                              if(id !== undefined){
-                                  for (let index = 0; index < value.length; index++) {
-                                    if(value[index].growerId ==  id){
-                                        data.push(value[index])
-                                    } 
-                                }
+                                  if(value.growerId ==  id) data.push(value) 
                              } else {
-                                   for (let index = 0; index < value.length; index++) {
-                                      data.push(value[index])
-                                }
+                                   data.push(value)
                              }
 
                         })
                         this.data.push(data);
                         return data;
                 } else {
-                     _.forEach(this.$store.getters.getProperties[0],function(value){
+                     _.forEach(this.$store.getters.getProperties,function(value){
                           for (let index = 0; index < value.length; index++) {
                                 if(value[index].growerId == id){
                                     data.push(value[index])
